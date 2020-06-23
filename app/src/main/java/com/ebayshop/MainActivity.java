@@ -12,13 +12,13 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    public void onClick(View view) {
-        EditText keywordsTextField = (EditText) findViewById(R.id.keywordsTextField);
-        String s = keywordsTextField.getText().toString();
-        Log.i("info", " aaaaa");
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(s);
-    }
+//    public void onClick(View view) {
+//        EditText keywordsTextField = (EditText) findViewById(R.id.keywordsTextField);
+//        String s = keywordsTextField.getText().toString();
+//        Log.i("info", " aaaaa");
+////        TextView textView = (TextView) findViewById(R.id.textView);
+//        textView.setText(s);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
