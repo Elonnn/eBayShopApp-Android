@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,14 +22,26 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener  {
+    public void onClear(View view) {
+        EditText firstField = (EditText)this.findViewById(R.id.keywordsTextField);
+        EditText secondField = (EditText)this.findViewById(R.id.minPriceTextField);
+        EditText thirdField = (EditText)this.findViewById(R.id.maxPriceTextField);
+        if (firstField != null) firstField.setText("");
+        if (secondField != null) secondField.setText("");
+        if (thirdField != null) thirdField.setText("");
 
-//    public void onClick(View view) {
-//        EditText keywordsTextField = (EditText) findViewById(R.id.keywordsTextField);
-//        String s = keywordsTextField.getText().toString();
-//        Log.i("info", " aaaaa");
-////        TextView textView = (TextView) findViewById(R.id.textView);
-//        textView.setText(s);
-//    }
+        final int[] checkBoxId = new int[] {
+                R.id.checkBoxNew,
+                R.id.checkBoxUsed,
+                R.id.checkBoxUnspecified,
+        };
+        for (int value : checkBoxId) {
+            ((CheckBox)findViewById(value)).setChecked(false);
+        }
+
+        ((Spinner) this.findViewById(R.id.spinner)).setSelection(0);
+    }
+
     JSONObject searchFilter = new JSONObject();
     private static final Map<String, String> optionMap = new HashMap<>();
     static {
@@ -43,12 +56,10 @@ public class MainActivity extends AppCompatActivity implements
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sort_by_options, android.R.layout.simple_spinner_item);

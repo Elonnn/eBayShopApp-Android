@@ -11,6 +11,8 @@
     <string name="used">Used</string>
     <string name="unspecified">unspecified</string>
     <string name="sort_by">Sort By</string>
+    <string name="search">SEARCH</string>
+    <string name="clear">CLEAR</string>
     <string-array name="sort_by_options">
         <item>Best Match</item>
         <item>Price: Highest First</item>
