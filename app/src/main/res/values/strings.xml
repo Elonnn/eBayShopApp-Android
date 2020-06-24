@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eBayShop</string>
     <string name="enter_keywords">Enter Keywords</string>
@@ -10,4 +11,10 @@
     <string name="used">Used</string>
     <string name="unspecified">unspecified</string>
     <string name="sort_by">Sort By</string>
+    <string-array name="sort_by_options">
+        <item>Best Match</item>
+        <item>Price: Highest First</item>
+        <item>Price + Shipping: Highest First</item>
+        <item>Price + Shipping: Lowest First</item>
+    </string-array>
 </resources>
