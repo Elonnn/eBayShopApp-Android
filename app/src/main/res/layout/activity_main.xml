@@ -11,9 +11,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/keywordsTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BlueLabelText"
         android:text="@string/keywords" />
 
     <EditText
@@ -23,9 +21,12 @@
         android:hint="@string/enter_keywords" />
 
     <TextView
-        android:id="@+id/priceRangeTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/keywordsWarningTextView"
+        style="@style/RedWarningText"
+        android:text="@string/please_enter_mandatory_field" />
+
+    <TextView
+        style="@style/BlueLabelText"
         android:text="@string/price_range" />
 
     <LinearLayout
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/minimum_price" />
+
         <EditText
             android:id="@+id/maxPriceTextField"
             android:layout_width="wrap_content"
@@ -49,8 +51,12 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/priceRangeWarningTextView"
+        android:text="@string/please_enter_valid_price_values"
+        style="@style/RedWarningText"/>
+
+    <TextView
+        style="@style/BlueLabelText"
         android:text="@string/condition" />
 
     <LinearLayout
@@ -58,61 +64,51 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+<!-- it seems layout_weight attribute is different from what the developer guide says-->
         <CheckBox
             android:id="@+id/checkBoxNew"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            style="@style/CheckBoxText"
             android:text="@string/new_" />
 
         <CheckBox
             android:id="@+id/checkBoxUsed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/CheckBoxText"
+            android:layout_weight="2"
             android:text="@string/used" />
 
         <CheckBox
             android:id="@+id/checkBoxUnspecified"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
+            style="@style/CheckBoxText"
             android:text="@string/unspecified" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BlueLabelText"
         android:text="@string/sort_by" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/condition" />
+        android:layout_height="30dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/BlueButton"
+            android:onClick="onSearch"
             android:text="@string/search" />
 
         <Button
             android:id="@+id/buttonClear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/BlueButton"
             android:onClick="onClear"
             android:text="@string/clear" />
     </LinearLayout>

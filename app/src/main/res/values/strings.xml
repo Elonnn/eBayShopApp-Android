@@ -2,17 +2,19 @@
 <resources>
     <string name="app_name">eBayShop</string>
     <string name="enter_keywords">Enter Keywords</string>
-    <string name="keywords">Keywords</string>
+    <string name="keywords">Keyword</string>
     <string name="price_range">Price Range</string>
     <string name="minimum_price">Minimum Price</string>
     <string name="maximum_price">Maximum Price</string>
     <string name="condition">Condition</string>
     <string name="new_">New</string>
     <string name="used">Used</string>
-    <string name="unspecified">unspecified</string>
+    <string name="unspecified">Unspecified</string>
     <string name="sort_by">Sort By</string>
     <string name="search">SEARCH</string>
     <string name="clear">CLEAR</string>
+    <string name="please_enter_mandatory_field">Please enter mandatory field</string>
+    <string name="please_enter_valid_price_values">Please enter valid price values</string>
     <string-array name="sort_by_options">
         <item>Best Match</item>
         <item>Price: Highest First</item>
