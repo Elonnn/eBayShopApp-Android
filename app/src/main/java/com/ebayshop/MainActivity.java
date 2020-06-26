@@ -2,6 +2,7 @@ package com.ebayshop;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,12 +99,14 @@ public class MainActivity extends AppCompatActivity implements
                 if (minPrice < 0) {
                     throw new InvalidPriceException("min_price < 0");
                 }
+                searchFilter.put("min_price", minPriceString);
             }
             if (!maxPriceString.isEmpty()) {
                 float maxPrice = parseFloat(maxPriceString);
                 if (maxPrice < 0) {
                     throw new InvalidPriceException("max_price < 0");
                 }
+                searchFilter.put("max_price", maxPriceString);
             }
             if (!minPriceString.isEmpty() && !maxPriceString.isEmpty()) {
                 float minPrice = parseFloat(minPriceString);
@@ -120,8 +124,6 @@ public class MainActivity extends AppCompatActivity implements
             return;
         }
         ((TextView) this.findViewById(R.id.priceRangeWarningTextView)).setVisibility(View.GONE);
-        searchFilter.put("min_price", minPriceString);
-        searchFilter.put("max_price", maxPriceString);
 
         ArrayList<String> condition = new ArrayList<String>();
         for (int id : checkBoxId) {
@@ -131,14 +133,11 @@ public class MainActivity extends AppCompatActivity implements
                 condition.add(checkBox.getText().toString());
             }
         }
-        searchFilter.put("condition", condition);
+        searchFilter.put("condition", new JSONArray(condition));
 
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//        Gson gson = gsonBuilder.create();
-//
-//        String JSONObjectSting = gson.toJson(searchFilter);
-        Log.i("selected", searchFilter.toString());
-
+        Intent intent = new Intent(this, ItemCatalogActivity.class);
+        intent.putExtra("SEARCH_PARAMS", searchFilter.toString());
+        startActivity(intent);
     }
 
     @Override
