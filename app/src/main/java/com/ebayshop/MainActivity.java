@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     JSONObject searchFilter = new JSONObject();
+    public static final int MAX_RETURNED_ITEM_NUM = 5;
 
     private static final Map<String, String> optionMap = new HashMap<>();
-
     static {
         optionMap.put("Best Match", "BestMatch");
         optionMap.put("Price: Highest First", "CurrentPriceHighest");
@@ -157,6 +157,12 @@ public class MainActivity extends AppCompatActivity implements
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        try {
+            searchFilter.put("max_returned_item_num", MAX_RETURNED_ITEM_NUM);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.ebayshop;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,10 +22,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 final class SearchParams {
     public String keywords;
 }
-
 
 public class ItemCatalogActivity extends AppCompatActivity {
 
@@ -63,7 +66,7 @@ public class ItemCatalogActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("Response", response.substring(0, 500));
+                        Log.i("Response", response);
 //                        TODO: gson parse data, and do scroll view
                     }
                 },
@@ -74,6 +77,15 @@ public class ItemCatalogActivity extends AppCompatActivity {
                     }
                 });
         requestQueue.add(stringRequest);
+
+        ArrayList<ItemSummary> items = new ArrayList<ItemSummary>();
+        items.add(new ItemSummary("TAG Heuer Men's WAV511A.BA0900 Grand Carrera Automatic Calibre 6 RS Watch", "https://thumbs4.ebaystatic.com/m/m0qxRb6jS2Hr8mpeGHm4ZOA/140.jpg"));
+//      {"items":[{"productID":"303512932859","title":"TAG Heuer Men's WAV511A.BA0900 Grand Carrera Automatic Calibre 6 RS Watch","imageURL":"https://thumbs4.ebaystatic.com/m/m0qxRb6jS2Hr8mpeGHm4ZOA/140.jpg","itemURL":"https://www.ebay.com/itm/TAG-Heuer-Mens-WAV511A-BA0900-Grand-Carrera-Automatic-Calibre-6-RS-Watch-/303512932859","price":"3415.97","location":"Brooklyn,NY,USA","isTopRated":true,"category":"Wristwatches","condition":"New with tags","shippingType":"Free","shippingCost":"0.0","shipToLocations":"Worldwide","isExpedited":true,"oneDayShippingAvailable":true,"bestOfferEnabled":true,"buyItNowAvailable":false,"listingType":"FixedPrice","gift":false,"watchCount":"1"},{"productID":"303552349954","title":"Tag Heuer Carrera","imageURL":"https://thumbs3.ebaystatic.com/m/mY-x7tUdId5DsZ5awR9gjdQ/140.jpg","itemURL":"https://www.ebay.com/itm/Tag-Heuer-Carrera-/303552349954","price":"3415.95","location":"Brooklyn,NY,USA","isTopRated":true,"category":"Wristwatches","condition":"New with tags","shippingType":"Free","shippingCost":"0.0","shipToLocations":"Worldwide","isExpedited":true,"oneDayShippingAvailable":true,"bestOfferEnabled":true,"buyItNowAvailable":false,"listingType":"FixedPrice","gift":false,"watchCount":"3"},{"productID":"303530583623","title":"Tag Heuer Formula 1 Calibre 16 Men's Chrono Cau2011.ba0873","imageURL":"https://thumbs4.ebaystatic.com/m/mbQjRqiRGDnNhN-VkCirFfw/140.jpg","itemURL":"https://www.ebay.com/itm/Tag-Heuer-Formula-1-Calibre-16-Mens-Chrono-Cau2011-ba0873-/303530583623","price":"3415.95","location":"Brooklyn,NY,USA","isTopRated":true,"category":"Wristwatches","condition":"New with tags","shippingType":"Free","shippingCost":"0.0","shipToLocations":"Worldwide","isExpedited":true,"oneDayShippingAvailable":true,"bestOfferEnabled":true,"buyItNowAvailable":false,"listingType":"FixedPrice","gift":false,"watchCount":"1"},{"productID":"303560868881","title":"TAG Heuer Connected Modular 45 Men's Watch SBF8A8012.11FT6077","imageURL":"https://thumbs2.ebaystatic.com/m/mvPETcqml2yHj97llp2eIQw/140.jpg","itemURL":"https://www.ebay.com/itm/TAG-Heuer-Connected-Modular-45-Mens-Watch-SBF8A8012-11FT6077-/303560868881","price":"3415.95","location":"Brooklyn,NY,USA","isTopRated":true,"category":"Wristwatches","condition":"New with tags","shippingType":"Free","shippingCost":"0.0","shipToLocations":"Worldwide","isExpedited":true,"oneDayShippingAvailable":true,"bestOfferEnabled":true,"buyItNowAvailable":false,"listingType":"FixedPrice","gift":false,"watchCount":"1"},{"productID":"303560869374","title":"TAG Heuer CONNECTED Luxury Smart Watch (Compatible with Android/iPhone) (Brow...","imageURL":"https://thumbs3.ebaystatic.com/m/m2fulrarE-rlmV5m3iL6Gag/140.jpg","itemURL":"https://www.ebay.com/itm/TAG-Heuer-CONNECTED-Luxury-Smart-Watch-Compatible-Android-iPhone-Brow-/303560869374","price":"3415.95","location":"Brooklyn,NY,USA","isTopRated":true,"category":"Wristwatches","condition":"New with tags","shippingType":"Free","shippingCost":"0.0","shipToLocations":"Worldwide","isExpedited":true,"oneDayShippingAvailable":true,"bestOfferEnabled":true,"buyItNowAvailable":false,"listingType":"FixedPrice","gift":false,"watchCount":"1"}]}
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
