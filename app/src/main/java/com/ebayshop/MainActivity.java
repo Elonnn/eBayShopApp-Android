@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
     JSONObject searchFilter = new JSONObject();
-    public static final int MAX_RETURNED_ITEM_NUM = 5;
+    public static final int MAX_RETURNED_ITEM_NUM = 50;
 
     private static final Map<String, String> optionMap = new HashMap<>();
     static {

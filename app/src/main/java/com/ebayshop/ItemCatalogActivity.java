@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -49,20 +52,8 @@ public class ItemCatalogActivity extends AppCompatActivity {
         String searchParams = getIntent().getStringExtra("SEARCH_PARAMS");
         assert searchParams != null;
         Log.i("params", searchParams);
-
-        TextView textView = (TextView) findViewById(R.id.textView);
-
-        Spannable itemNumSpannable = new SpannableString("50");
-        itemNumSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.ic_launcher_background)), 0, itemNumSpannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.append(itemNumSpannable);
-
-        Spannable constSpannable = new SpannableString(" results for ");
-        textView.append(constSpannable);
-
-        Gson gson = new Gson();
-        Spannable itemKeywordsSpannable = new SpannableString(gson.fromJson(searchParams, SearchParams.class).keywords);
-        itemKeywordsSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.ic_launcher_background)), 0, itemKeywordsSpannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.append(itemKeywordsSpannable);
+        final Gson gson = new Gson();
+        final String keywords = gson.fromJson(searchParams, SearchParams.class).keywords;
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -71,12 +62,12 @@ public class ItemCatalogActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("Response", response);
-//                        TODO: gson parse data, and do scroll view
-                        Gson gson = new GsonBuilder().create();
                         ItemSummaryResponse itemsResponse = gson.fromJson(response, ItemSummaryResponse.class );
                         ArrayList<ItemSummary> items = itemsResponse.items;
                         if (items.size() > 0) {
-                            initRecyclerView(items);
+                            showCatalogScreen(items, keywords);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No Records", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -89,13 +80,27 @@ public class ItemCatalogActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    private void showCatalogScreen(ArrayList<ItemSummary> items, String keywords) {
+
+        TextView textView = (TextView) findViewById(R.id.textView);
+        Spanned myHtmlString = Html.fromHtml("Showing <font color=\"#1E6DE2\"> " + String.valueOf(items.size()) + "</font>  results for <font color=\"#1E6DE2\"> " + keywords+ "</font>");
+        textView.setText(myHtmlString);
+
+        initRecyclerView(items);
+
+    }
+
     private void initRecyclerView(ArrayList<ItemSummary> items) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items);
         recyclerView.setAdapter(adapter);
+
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
     }
 
     @Override

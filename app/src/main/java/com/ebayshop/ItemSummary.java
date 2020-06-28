@@ -1,6 +1,8 @@
 package com.ebayshop;
 
-public class ItemSummary {
+import java.io.Serializable;
+
+public class ItemSummary implements Serializable {
     private String title;
     private String imageURL;
     private String productID;
