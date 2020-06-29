@@ -1,6 +1,7 @@
 package com.ebayshop;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class ItemSummary implements Serializable {
     private String title;
@@ -10,6 +11,7 @@ public class ItemSummary implements Serializable {
     private String shippingCost;
     private String condition;
     private Boolean isTopRated;
+    private Map<String, String> shippingInfo;
 
     public String getProductID() {
         return productID;
@@ -39,8 +41,7 @@ public class ItemSummary implements Serializable {
         return imageURL;
     }
 
-    public ItemSummary(String title, String imageURL) {
-        this.title = title;
-        this.imageURL = imageURL;
+    public Map<String, String> getShippingInfo() {
+        return shippingInfo;
     }
 }
