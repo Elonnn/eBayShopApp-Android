@@ -8,7 +8,7 @@ public class ItemDetail {
 
     private ArrayList<String> brand;
     private String subtitle;
-    private Map<String, String> specifications;
+    private Map<String, ArrayList<String>> specifications;
 
     private Map<String, String> sellerInfo;
     private Map<String, String> returnPolicies;
@@ -25,7 +25,7 @@ public class ItemDetail {
         return subtitle;
     }
 
-    public Map<String, String> getSpecifications() {
+    public Map<String, ArrayList<String>> getSpecifications() {
         return specifications;
     }
 

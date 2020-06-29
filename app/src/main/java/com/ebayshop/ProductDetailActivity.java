@@ -51,9 +51,9 @@ public class ProductDetailActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("Response", response);
-//                        Gson gson = new Gson();
-//                        ItemDetail itemDetail = gson.fromJson(response, ItemDetail.class );
-                        ItemDetail itemDetail = new ItemDetail();
+                        Gson gson = new Gson();
+                        ItemDetail itemDetail = gson.fromJson(response, ItemDetail.class );
+//                        ItemDetail itemDetail = new ItemDetail();
                         showDetailProductScreen(itemDetail);
                     }
                 },
