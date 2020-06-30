@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +28,6 @@ public class ProductSummaryTabFragment extends Fragment {
     private ItemSummary itemSummary;
     private ItemDetail itemDetail;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +50,7 @@ public class ProductSummaryTabFragment extends Fragment {
 
         ((TextView)view.findViewById(R.id.title)).setText(itemSummary.getTitle());
         ((TextView)view.findViewById(R.id.price)).setText(String.format("$%s", itemSummary.getPrice()));
+        ((TextView)view.findViewById(R.id.shippingPrice)).setText(String.format("Ships for $%s", itemSummary.getShippingCost()));
 
         displayProductFeatures(view);
 
@@ -64,8 +63,7 @@ public class ProductSummaryTabFragment extends Fragment {
         return view;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void displayProductFeatures(View view) {
+    private void displayProductFeatures(@org.jetbrains.annotations.NotNull View view) {
         WebView webView = (WebView) view.findViewById(R.id.webView1);
         webView.setBackgroundColor(Color.TRANSPARENT);
 
