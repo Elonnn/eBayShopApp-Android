@@ -21,4 +21,12 @@
         <item>Price + Shipping: Highest First</item>
         <item>Price + Shipping: Lowest First</item>
     </string-array>
+
+    <string name="result_messages">
+        Showing &lt;font color=\"#1E6DE2\"> %1$d &lt;/font> results for &lt;font color=\"#1E6DE2\"> %2$s &lt;/font>
+    </string>
+
+    <string name="ul">
+        &lt;ul> %1$s &lt;/ul>
+    </string>
 </resources>

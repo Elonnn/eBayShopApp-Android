@@ -1,15 +1,25 @@
 package com.ebayshop;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
+import java.util.Map;
+
 public class SellerInfoTabFragment extends Fragment {
+    private ItemDetail itemDetail;
+
     /**
      * Called to have the fragment instantiate its user interface view.
      * This is optional, and non-graphical fragments can return null. This will be called between
@@ -36,6 +46,25 @@ public class SellerInfoTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.seller_information_tab_fragment, container, false);
+
+        Map<String, String> sellerInfo = itemDetail.getSellerInfo();
+        TextView sellerInfoTextView = view.findViewById(R.id.seller_info);
+
+        for (Map.Entry mapElement : sellerInfo.entrySet()) {
+            String key = (String)mapElement.getKey();
+
+        }
+//
+//        String html = String.format(getResources().getString(R.string.ul), embedded);
+//        Log.i("html", html);
+//        Spanned styledText = Html.fromHtml(html);
+//
+//        textView.setText(styledText);
+
         return view;
+    }
+
+    public SellerInfoTabFragment(ItemDetail itemDetail) {
+        this.itemDetail = itemDetail;
     }
 }

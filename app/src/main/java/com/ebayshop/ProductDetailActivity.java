@@ -42,7 +42,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         this.itemSummary = itemSummary;
         setTitle(itemSummary.getTitle());
 
-//        String url = "http://localhost:3000/api/item?id=" + itemSummary.getProductID();  // android device localhost:3000 does not hit the port on this computer.
+//        String url = "http://localhost:3000/api/item?id=" + itemSummary.getProductID();
+//        android device localhost:3000 does not hit the port on this computer.
         String url = "https://ebay-shopping-2.wl.r.appspot.com/api/item?id=" + itemSummary.getProductID();
         Log.i("request", url);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -53,7 +54,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                         Log.i("Response", response);
                         Gson gson = new Gson();
                         ItemDetail itemDetail = gson.fromJson(response, ItemDetail.class );
-//                        ItemDetail itemDetail = new ItemDetail();
                         showDetailProductScreen(itemDetail);
                     }
                 },
@@ -74,8 +74,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ProductSummaryTabFragment(), "PRODUCT");
-        adapter.addFragment(new SellerInfoTabFragment(), "SELLER INFO");
+        adapter.addFragment(new ProductSummaryTabFragment(this.itemSummary, this.itemDetail), "PRODUCT");
+        adapter.addFragment(new SellerInfoTabFragment(this.itemDetail), "SELLER INFO");
         adapter.addFragment(new ShippingInfoTabFragment(), "SHIPPING");
         viewPager.setAdapter(adapter);
 

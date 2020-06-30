@@ -5,6 +5,15 @@
 
 
     <TextView
+        android:id="@+id/seller_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seller Information\n" />
+
+    <View style="@style/Divider"/>
+
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />

@@ -81,10 +81,13 @@ public class ItemCatalogActivity extends AppCompatActivity {
     }
 
     private void showCatalogScreen(ArrayList<ItemSummary> items, String keywords) {
-
         TextView textView = (TextView) findViewById(R.id.textView);
-        Spanned myHtmlString = Html.fromHtml("Showing <font color=\"#1E6DE2\"> " + String.valueOf(items.size()) + "</font>  results for <font color=\"#1E6DE2\"> " + keywords+ "</font>");
-        textView.setText(myHtmlString);
+
+        String html = String.format(getResources().getString(R.string.result_messages), items.size(), keywords);
+        Log.i("html", html);
+        Spanned styledText = Html.fromHtml(html);
+
+        textView.setText(styledText);
 
         initRecyclerView(items);
 
