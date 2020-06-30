@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#ff7b00</color>
+    <color name="colorPrimaryDark">#ff7b00</color>
     <color name="colorAccent">#808864C8</color>
     <color name="ic_launcher_background">#1E6DE2</color>
-    <color name="tab_selected_color">#ff7b00</color>
-    <color name="tab_normal_color">#1dff00</color>
+    <color name="tab_selected_color">#1E6DE2</color>
+    <color name="tab_normal_color">#1E6DE2</color>
     <color name="cardview_light_background">#ff7b00</color>
     <color name="shopping_icon_color">#ff7b00</color>
 </resources>

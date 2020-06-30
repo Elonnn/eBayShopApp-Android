@@ -2,9 +2,13 @@ package com.ebayshop;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,8 +93,15 @@ public class ProductDetailActivity extends AppCompatActivity {
         adapter.addFragment(new ShippingInfoTabFragment(this.itemSummary), "SHIPPING");
         viewPager.setAdapter(adapter);
 
+        Drawable seller = getResources().getDrawable(R.drawable.ic_seller);
+        seller.setColorFilter(new
+                PorterDuffColorFilter(ContextCompat.getColor(this, R.color.ic_launcher_background), PorterDuff.Mode.MULTIPLY));
+
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.information_variant_selected);
+        tabLayout.getTabAt(1).setIcon(seller);
+        tabLayout.getTabAt(2).setIcon(R.drawable.truck_delivery_selected);
     }
 
     @Override
