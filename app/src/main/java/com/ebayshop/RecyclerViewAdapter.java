@@ -31,26 +31,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context = context;
     }
 
-    /**
-     * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
-     * an item.
-     * <p>
-     * This new ViewHolder should be constructed with a new View that can represent the items
-     * of the given type. You can either create a new View manually or inflate it from an XML
-     * layout file.
-     * <p>
-     * The new ViewHolder will be used to display items of the adapter using
-     * {@link #onBindViewHolder(ViewHolder, int)}. Since it will be re-used to display
-     * different items in the data set, it is a good idea to cache references to sub views of
-     * the View to avoid unnecessary {@link View#findViewById(int)} calls.
-     *
-     * @param parent   The ViewGroup into which the new View will be added after it is bound to
-     *                 an adapter position.
-     * @param viewType The view type of the new View.
-     * @return A new ViewHolder that holds a View of the given view type.
-     * @see #getItemViewType(int)
-     * @see #onBindViewHolder(ViewHolder, int)
-     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -79,10 +59,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ItemSummary item = items.get(position);
-        holder.title.setText(item.getTitle());
+        ((TextView)holder.view.findViewById(R.id.title)).setText(item.getTitle());
+//        ((TextView)holder.view.findViewById(R.id.price)).setText(item.getPrice());
+//        ((TextView)holder.view.findViewById(R.id.shippingPrice)).setText(item.getShippingCost());
 
-        Glide.with(context).asBitmap().load(item.getImageURL()).into(holder.image);
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context).asBitmap().load(item.getImageURL()).into((ImageView) holder.view.findViewById(R.id.image));
+        holder.view.findViewById(R.id.cardView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProductDetailActivity.class);
@@ -100,15 +82,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
-        TextView title;
-        CardView parentLayout;
+        View view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            title = itemView.findViewById(R.id.title);
-            parentLayout = itemView.findViewById(R.id.cardView);
+            view = itemView;
         }
     }
 }
