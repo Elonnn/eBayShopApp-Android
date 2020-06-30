@@ -59,7 +59,7 @@ public class ProductSummaryTabFragment extends Fragment {
         for (Map.Entry mapElement : this.itemDetail.getSpecifications().entrySet()) {
             specifications.put((String) mapElement.getKey(), String.join("/ ", (ArrayList) mapElement.getValue()));
         }
-        ListInfoProcessor.displayListInfo("Specifications", specifications, (WebView) view.findViewById(R.id.webView2));
+        ListInfoProcessor.displayListInfo(specifications, (WebView) view.findViewById(R.id.webView2));
 
         return view;
     }
@@ -67,6 +67,8 @@ public class ProductSummaryTabFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void displayProductFeatures(View view) {
         WebView webView = (WebView) view.findViewById(R.id.webView1);
+        webView.setBackgroundColor(Color.TRANSPARENT);
+
         if (this.itemDetail.getSubtitle() == null && this.itemDetail.getBrand() == null) {
             ((TextView) view.findViewById(R.id.textView1)).setVisibility(View.GONE);
             webView.setVisibility(View.GONE);
@@ -83,8 +85,6 @@ public class ProductSummaryTabFragment extends Fragment {
             htmlBuilder.append(line);
         }
         webView.loadData(htmlBuilder.toString(), "text/html", "utf-8");
-
-
     }
 
     public ProductSummaryTabFragment(ItemSummary itemSummary, ItemDetail itemDetail) {

@@ -28,8 +28,8 @@ public class SellerInfoTabFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.seller_information_tab_fragment, container, false);
 
-        ListInfoProcessor.displayListInfo("Seller Information", itemDetail.getSellerInfo(), (WebView) view.findViewById(R.id.webView1));
-        ListInfoProcessor.displayListInfo("Return Policies", itemDetail.getReturnPolicies(), (WebView) view.findViewById(R.id.webView2));
+        ListInfoProcessor.displayListInfo(itemDetail.getSellerInfo(), (WebView) view.findViewById(R.id.webView1));
+        ListInfoProcessor.displayListInfo(itemDetail.getReturnPolicies(), (WebView) view.findViewById(R.id.webView2));
 
         return view;
     }

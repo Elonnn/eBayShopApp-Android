@@ -20,7 +20,7 @@ public class ListInfoProcessor {
         );
     }
 
-    static void displayListInfo(String title, Map<String, String> entries, WebView webView){
+    static void displayListInfo(Map<String, String> entries, WebView webView){
         webView.setBackgroundColor(Color.TRANSPARENT);
 
         StringBuilder embeddedLi = new StringBuilder();
@@ -29,7 +29,7 @@ public class ListInfoProcessor {
             embeddedLi.append(entry);
         }
 
-        String html = String.format("<h3> %1$s </h3> <ul style=\"color: rgb(131, 131, 131);\"> %2$s </ul>", title, embeddedLi.toString());
+        String html = String.format("<ul style=\"color: rgb(131, 131, 131);\"> %1$s </ul>", embeddedLi.toString());
         Log.i("html", html);
 
         webView.loadData(html, "text/html", "utf-8");

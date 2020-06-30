@@ -19,7 +19,7 @@ public class ShippingInfoTabFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shipping_information_tab_fragment, container, false);
 
-        ListInfoProcessor.displayListInfo("Shipping Information", itemSummary.getShippingInfo(), (WebView) view.findViewById(R.id.webView1));
+        ListInfoProcessor.displayListInfo(itemSummary.getShippingInfo(), (WebView) view.findViewById(R.id.webView1));
 
         return view;
     }
