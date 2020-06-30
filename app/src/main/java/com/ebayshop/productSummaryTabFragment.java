@@ -1,26 +1,34 @@
 package com.ebayshop;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductSummaryTabFragment extends Fragment {
 
     private ItemSummary itemSummary;
     private ItemDetail itemDetail;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +51,38 @@ public class ProductSummaryTabFragment extends Fragment {
 
         ((TextView)view.findViewById(R.id.title)).setText(itemSummary.getTitle());
         ((TextView)view.findViewById(R.id.price)).setText(String.format("$%s", itemSummary.getPrice()));
+
+        displayProductFeatures((WebView) view.findViewById(R.id.webView1));
+
+        Map<String, String> specifications = new HashMap<String, String>();
+        for (Map.Entry mapElement : this.itemDetail.getSpecifications().entrySet()) {
+            specifications.put((String) mapElement.getKey(), String.join("/ ", (ArrayList) mapElement.getValue()));
+        }
+        ListInfoProcessor.displayListInfo("Specifications", specifications, (WebView) view.findViewById(R.id.webView2));
+
         return view;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void displayProductFeatures(WebView webView) {
+        if (this.itemDetail.getSubtitle() == null && this.itemDetail.getBrand() == null) {
+            webView.setVisibility(View.GONE);
+            return;
+        }
+
+        webView.setBackgroundColor(Color.TRANSPARENT);
+
+        StringBuilder html = new StringBuilder("<h3> Product Features </h3>");
+        if (this.itemDetail.getSubtitle() != null) {
+            String line = String.format("<p> %1$s <span style=\"color: rgb(131, 131, 131);\"> %2$s </span> </p>", "Subtitle", this.itemDetail.getSubtitle());
+            html.append(line);
+        }
+        if (this.itemDetail.getBrand() != null) {
+            String line = String.format("<p> %1$s <span style=\"color: rgb(131, 131, 131);\"> %2$s </span> </p>", "Brand", String.join("/ ", this.itemDetail.getBrand()) );
+            html.append(line);
+        }
+        webView.loadData(html.toString(), "text/html", "utf-8");
+
     }
 
     public ProductSummaryTabFragment(ItemSummary itemSummary, ItemDetail itemDetail) {

@@ -6,12 +6,19 @@ import java.util.Map;
 public class ItemSummary implements Serializable {
     private String title;
     private String imageURL;
+
+    private String itemURL;
     private String productID;
+
     private String price;
     private String shippingCost;
     private String condition;
     private Boolean isTopRated;
     private Map<String, String> shippingInfo;
+
+    public String getItemURL() {
+        return itemURL;
+    }
 
     public String getProductID() {
         return productID;

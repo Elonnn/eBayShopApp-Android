@@ -31,11 +31,11 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-final class SearchParams {
-    public String keywords;
-}
-
 public class ItemCatalogActivity extends AppCompatActivity {
+
+    static final class SearchParams {
+        public String keywords;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
