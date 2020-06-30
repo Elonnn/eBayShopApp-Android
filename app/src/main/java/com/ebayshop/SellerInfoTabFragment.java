@@ -1,5 +1,6 @@
 package com.ebayshop;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import java.util.List;
 import java.util.Map;
 
+
 public class SellerInfoTabFragment extends Fragment {
     private ItemDetail itemDetail;
 
@@ -26,22 +28,9 @@ public class SellerInfoTabFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.seller_information_tab_fragment, container, false);
 
-        Map<String, String> sellerInfo = itemDetail.getSellerInfo();
-        TextView sellerInfoTextView = view.findViewById(R.id.sellerInfo);
-//        WebView webView = view.findViewById(R.id.webView);
+        ListInfoProcessor.displayListInfo("Seller Information", itemDetail.getSellerInfo(), (WebView) view.findViewById(R.id.webView1));
+        ListInfoProcessor.displayListInfo("Return Policies", itemDetail.getReturnPolicies(), (WebView) view.findViewById(R.id.webView2));
 
-        StringBuilder embeddedLi = new StringBuilder();
-        for (Map.Entry mapElement : sellerInfo.entrySet()) {
-            String entry = String.format("<li style=\"color:red;\"> <b>%1$s</b> : %2$s</li>", mapElement.getKey(), mapElement.getValue());
-            embeddedLi.append(entry);
-        }
-
-        String html = String.format("<h3> %1$s </h3> <ul> %2$s </ul>", "Seller Information", embeddedLi.toString());
-        Log.i("html", html);
-        Spanned styledText = Html.fromHtml(html);
-
-        sellerInfoTextView.setText(styledText);
-//        webView.loadData(html, "text/html", "utf-8");
         return view;
     }
 

@@ -76,7 +76,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ProductSummaryTabFragment(this.itemSummary, this.itemDetail), "PRODUCT");
         adapter.addFragment(new SellerInfoTabFragment(this.itemDetail), "SELLER INFO");
-        adapter.addFragment(new ShippingInfoTabFragment(), "SHIPPING");
+        adapter.addFragment(new ShippingInfoTabFragment(this.itemSummary), "SHIPPING");
         viewPager.setAdapter(adapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);

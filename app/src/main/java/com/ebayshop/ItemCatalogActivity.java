@@ -56,8 +56,10 @@ public class ItemCatalogActivity extends AppCompatActivity {
         final String keywords = gson.fromJson(searchParams, SearchParams.class).keywords;
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "https://ebay-shopping-2.wl.r.appspot.com/api/search?params=" + searchParams,
+        String url = "https://ebay-shopping-2.wl.r.appspot.com/api/search?params=" + searchParams;
+        Log.i("request", url);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
