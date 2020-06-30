@@ -26,5 +26,7 @@
         Showing &lt;font color=\"#1E6DE2\"> %1$d &lt;/font> results for &lt;font color=\"#1E6DE2\"> %2$s &lt;/font>
     </string>
     <string name="ic_redirect">ic_redirect</string>
+    <string name="product_features">Product Features</string>
+    <string name="specifications">Specifications</string>
 
 </resources>

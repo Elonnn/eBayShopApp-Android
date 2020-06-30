@@ -3,6 +3,7 @@ package com.ebayshop;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class ProductSummaryTabFragment extends Fragment {
         ((TextView)view.findViewById(R.id.title)).setText(itemSummary.getTitle());
         ((TextView)view.findViewById(R.id.price)).setText(String.format("$%s", itemSummary.getPrice()));
 
-        displayProductFeatures((WebView) view.findViewById(R.id.webView1));
+        displayProductFeatures(view);
 
         Map<String, String> specifications = new HashMap<String, String>();
         for (Map.Entry mapElement : this.itemDetail.getSpecifications().entrySet()) {
@@ -64,24 +65,25 @@ public class ProductSummaryTabFragment extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void displayProductFeatures(WebView webView) {
+    private void displayProductFeatures(View view) {
+        WebView webView = (WebView) view.findViewById(R.id.webView1);
         if (this.itemDetail.getSubtitle() == null && this.itemDetail.getBrand() == null) {
+            ((TextView) view.findViewById(R.id.textView1)).setVisibility(View.GONE);
             webView.setVisibility(View.GONE);
             return;
         }
 
-        webView.setBackgroundColor(Color.TRANSPARENT);
-
-        StringBuilder html = new StringBuilder("<h3> Product Features </h3>");
+        StringBuilder htmlBuilder = new StringBuilder();
         if (this.itemDetail.getSubtitle() != null) {
             String line = String.format("<p> %1$s <span style=\"color: rgb(131, 131, 131);\"> %2$s </span> </p>", "Subtitle", this.itemDetail.getSubtitle());
-            html.append(line);
+            htmlBuilder.append(line);
         }
         if (this.itemDetail.getBrand() != null) {
             String line = String.format("<p> %1$s <span style=\"color: rgb(131, 131, 131);\"> %2$s </span> </p>", "Brand", String.join("/ ", this.itemDetail.getBrand()) );
-            html.append(line);
+            htmlBuilder.append(line);
         }
-        webView.loadData(html.toString(), "text/html", "utf-8");
+        webView.loadData(htmlBuilder.toString(), "text/html", "utf-8");
+
 
     }
 
