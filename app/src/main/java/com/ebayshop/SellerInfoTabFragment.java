@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,47 +21,27 @@ import java.util.Map;
 public class SellerInfoTabFragment extends Fragment {
     private ItemDetail itemDetail;
 
-    /**
-     * Called to have the fragment instantiate its user interface view.
-     * This is optional, and non-graphical fragments can return null. This will be called between
-     * {@link #onCreate(Bundle)} and {@link #onActivityCreated(Bundle)}.
-     * <p>A default View can be returned by calling {@link #Fragment(int)} in your
-     * constructor. Otherwise, this method returns null.
-     *
-     * <p>It is recommended to <strong>only</strong> inflate the layout in this method and move
-     * logic that operates on the returned View to {@link #onViewCreated(View, Bundle)}.
-     *
-     * <p>If you return a View from here, you will later be called in
-     * {@link #onDestroyView} when the view is being released.
-     *
-     * @param inflater           The LayoutInflater object that can be used to inflate
-     *                           any views in the fragment,
-     * @param container          If non-null, this is the parent view that the fragment's
-     *                           UI should be attached to.  The fragment should not add the view itself,
-     *                           but this can be used to generate the LayoutParams of the view.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     *                           from a previous saved state as given here.
-     * @return Return the View for the fragment's UI, or null.
-     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.seller_information_tab_fragment, container, false);
 
         Map<String, String> sellerInfo = itemDetail.getSellerInfo();
-        TextView sellerInfoTextView = view.findViewById(R.id.seller_info);
+        TextView sellerInfoTextView = view.findViewById(R.id.sellerInfo);
+//        WebView webView = view.findViewById(R.id.webView);
 
+        StringBuilder embeddedLi = new StringBuilder();
         for (Map.Entry mapElement : sellerInfo.entrySet()) {
-            String key = (String)mapElement.getKey();
-
+            String entry = String.format("<li style=\"color:red;\"> <b>%1$s</b> : %2$s</li>", mapElement.getKey(), mapElement.getValue());
+            embeddedLi.append(entry);
         }
-//
-//        String html = String.format(getResources().getString(R.string.ul), embedded);
-//        Log.i("html", html);
-//        Spanned styledText = Html.fromHtml(html);
-//
-//        textView.setText(styledText);
 
+        String html = String.format("<h3> %1$s </h3> <ul> %2$s </ul>", "Seller Information", embeddedLi.toString());
+        Log.i("html", html);
+        Spanned styledText = Html.fromHtml(html);
+
+        sellerInfoTextView.setText(styledText);
+//        webView.loadData(html, "text/html", "utf-8");
         return view;
     }
 

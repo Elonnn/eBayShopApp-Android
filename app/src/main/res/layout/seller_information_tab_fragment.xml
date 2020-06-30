@@ -4,17 +4,20 @@
     android:layout_height="match_parent">
 
 
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <TextView
-        android:id="@+id/seller_info"
+        android:id="@+id/sellerInfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Seller Information\n" />
+        android:layout_height="wrap_content" />
 
     <View style="@style/Divider"/>
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="wrap_content"/>
 </LinearLayout>
