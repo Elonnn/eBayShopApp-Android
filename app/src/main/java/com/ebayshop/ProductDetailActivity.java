@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,6 +34,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private ItemSummary itemSummary;
     private ItemDetail itemDetail;
+
+    private ProgressBar spinner;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +55,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+
         ItemSummary itemSummary = (ItemSummary) getIntent().getSerializableExtra("ITEM_SUMMARY");
         assert itemSummary != null;
         this.itemSummary = itemSummary;
@@ -69,6 +75,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         ItemDetail itemDetail = gson.fromJson(response, ItemDetail.class );
                         showDetailProductScreen(itemDetail);
+
+                        spinner.setVisibility(View.GONE);
                     }
                 },
                 new Response.ErrorListener() {
