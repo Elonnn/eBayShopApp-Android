@@ -16,6 +16,8 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,17 +41,23 @@ public class ItemCatalogActivity extends AppCompatActivity {
         public String keywords;
     }
 
+    private ProgressBar spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_catalog);
         setTitle("Search Results");
 
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
 
         String searchParams = getIntent().getStringExtra("SEARCH_PARAMS");
         assert searchParams != null;
@@ -71,6 +81,7 @@ public class ItemCatalogActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(getApplicationContext(), "No Records", Toast.LENGTH_SHORT).show();
                         }
+                        spinner.setVisibility(View.GONE);
                     }
                 },
                 new Response.ErrorListener() {
@@ -82,7 +93,7 @@ public class ItemCatalogActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void showCatalogScreen(ArrayList<ItemSummary> items, String keywords) {
+    private void showCatalogScreen(@NotNull ArrayList<ItemSummary> items, String keywords) {
         TextView textView = (TextView) findViewById(R.id.textView);
 
         String html = String.format(getResources().getString(R.string.result_messages), items.size(), keywords);
@@ -109,7 +120,7 @@ public class ItemCatalogActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;

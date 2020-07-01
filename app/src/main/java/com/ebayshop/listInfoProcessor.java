@@ -25,7 +25,7 @@ public class ListInfoProcessor {
 
         StringBuilder embeddedLi = new StringBuilder();
         for (Map.Entry mapElement : entries.entrySet()) {
-            String entry = String.format("<li style=\"margin: 20px 0;\"> <b>%1$s</b> : %2$s</li>", splitCamelCase((String) mapElement.getKey()), splitCamelCase((String) mapElement.getValue()));
+            String entry = String.format("<li style=\"margin: 15px 0;\"> <b>%1$s</b> : %2$s</li>", splitCamelCase((String) mapElement.getKey()), splitCamelCase((String) mapElement.getValue()));
             embeddedLi.append(entry);
         }
 

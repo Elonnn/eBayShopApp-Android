@@ -23,14 +23,22 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            style="@style/BlackTitleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image" />
 
         <TextView
-            android:id="@+id/condition"
+            android:id="@+id/shippingPrice"
             style="@style/GreyShippingPriceText"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/condition"
+            style="@style/ConditionText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

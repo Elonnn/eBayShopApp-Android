@@ -3,6 +3,9 @@ package com.ebayshop;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,9 +62,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ItemSummary item = items.get(position);
-        ((TextView)holder.view.findViewById(R.id.title)).setText(item.getTitle());
-//        ((TextView)holder.view.findViewById(R.id.price)).setText(item.getPrice());
-//        ((TextView)holder.view.findViewById(R.id.shippingPrice)).setText(item.getShippingCost());
+        ((TextView)holder.view.findViewById(R.id.title)).setText(item.getTitle().toUpperCase());
+        ((TextView)holder.view.findViewById(R.id.price)).setText(String.format("$%s", item.getPrice()));
+        ((TextView)holder.view.findViewById(R.id.condition)).setText(item.getCondition());
+
+        String html = String.format("Ships for <b> $%s </b>", item.getShippingCost());
+        ((TextView)holder.view.findViewById(R.id.shippingPrice)).setText(Html.fromHtml(html));
 
         Glide.with(context).asBitmap().load(item.getImageURL()).into((ImageView) holder.view.findViewById(R.id.image));
         holder.view.findViewById(R.id.cardView).setOnClickListener(new View.OnClickListener() {
